@@ -75,6 +75,26 @@ uint8_t gamma_reset(uint32_t num)
 	return sqrt(num << 8);
 }
 
+Image *create_image(uint32_t width, uint32_t height)
+{
+	uint32_t i;
+	Image *img = (Image *) malloc(sizeof(Image));
+	check_null(img, "Unable to malloc Image in create_image");
+
+	img->width = width;
+	img->height = height;
+	img->image = (png_bytep *) malloc(sizeof(png_bytep) * img->height);
+	check_null(img->image, "Unable to malloc png_bytep for Image in open_png");
+
+	for (i = 0; i < img->height; i++)
+	{
+		img->image[i] = (png_bytep) calloc(img->width * 4, 1);
+		check_null(img->image[i], "Unable to calloc png_bytep for Image in open_png");
+	}
+
+	return img;
+}
+
 // Open and read an image
 Image *open_image(char *filename)
 {
@@ -126,12 +146,12 @@ Image *open_image(char *filename)
 	// Allocate the image space
 	num_row_bytes = png_get_rowbytes(png, info);
 	img->image = (png_bytep *) malloc(sizeof(png_bytep) * img->height);
-	check_null(img, "Unable to malloc png_bytep for Image in open_png");
+	check_null(img->image, "Unable to malloc png_bytep for Image in open_png");
 
 	for (i = 0; i < img->height; i++)
 	{
 		img->image[i] = (png_bytep) malloc(num_row_bytes);
-		check_null(img, "Unable to malloc png_bytep for Image in open_png");
+		check_null(img->image[i], "Unable to malloc png_bytep for Image in open_png");
 	}
 
 	png_read_image(png, img->image);

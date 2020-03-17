@@ -29,6 +29,7 @@ void print_info(uint32_t width, uint32_t height, int uint8_t_type, int bit_depth
 
 int8_t not_in_bounds(Image *img, uint32_t x, uint32_t y);
 
+Image *create_image(uint32_t width, uint32_t height);
 Image *open_image(char *filename);
 void save_image(Image *img, char *filename);
 

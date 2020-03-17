@@ -16,6 +16,8 @@ uint32_t get_weight(uint32_t *histogram, uint32_t start, uint32_t end);
 uint32_t balance(uint32_t *histogram);
 
 void threshold(Image *img);
-void colorize(Image *img, uint32_t red, uint32_t green, uint32_t blue);
+void colorize_3_classes(Image *img, uint32_t red, uint32_t green, uint32_t blue);
+void colorize_2_classes(Image *img, uint32_t red, uint32_t green, uint32_t blue);
+void colorize_rgb(Image *img, uint32_t red, uint32_t green, uint32_t blue);
 
 #endif

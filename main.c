@@ -15,13 +15,11 @@ int main(int argc, char **argv)
 	uint8_t bandwidth;
 	uint32_t gens = 50;
 
-	if (argc < 3) error("Too few command line arguments. Need [source filename] [output filename]");
+	if (argc < 2) error("Too few command line arguments. Need [source filename]");
 
 	img = open_image(argv[1]);
 
 	threshold(img);
-	
-	save_image(img, argv[2]);
 
 	img = free_image(img);
 
